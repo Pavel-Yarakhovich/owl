@@ -2,12 +2,14 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Theme } from '../theme-context';
 import classes from './Calculator.module.scss';
 import axios from 'axios';
+import Spinner from './Spinner';
 
 const Total = ({ amount:amt, time:tm }) => {
 	const PERCENTAGE = 0.16;
 	const [amount, setAmount] = useState(amt);
 	const [time, setTime] = useState(tm);
 	const [exRate, setExRate] = useState(0);
+	const [isFetched, setIsFetched] = useState(false);
 
 	const context = useContext(Theme);
 
@@ -22,14 +24,21 @@ const Total = ({ amount:amt, time:tm }) => {
 			setExRate(result.data.Cur_OfficialRate);
 		};
 		fetchExRate();
+		setIsFetched(true);
 	}, []);
 
 	const total = amount + amount * PERCENTAGE / 12 * time;
 
+	let content = isFetched ?
+		(<>
+			<p style={{ color: context.text, fontSize: '0.8rem' }}>Percentage rate is: {PERCENTAGE*100}%</p>
+			<p style={{ color: context.text, fontSize: '0.8rem' }}>Exchange rate is: {exRate.toFixed(2)}</p>
+		</>) :
+		<Spinner />;
+
 	return (
 		<div>
-			<p style={{ color: context.text, fontSize: '0.8rem' }}>Percentage rate is: {PERCENTAGE*100}%</p>
-			<p style={{ color: context.text, fontSize: '0.8rem' }}>Exchange rate is: {exRate.toFixed(3)}</p>
+			{content}
 			<div className={classes.calculator__total_block}>
 				<p
 					className={classes.calculator__total_block_text}

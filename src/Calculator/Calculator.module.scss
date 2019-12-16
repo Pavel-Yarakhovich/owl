@@ -8,12 +8,16 @@ $dark-grey: rgb(165, 165, 165);
 	box-sizing: border-box;
 	margin: 50px auto;
 	border-radius: 8px;
+	position: relative;
+	overflow: hidden;
 
 	&__title_block {
 		display: flex;
 		justify-content: space-between;
 		margin-bottom: 20px;
 		font-weight: 700;
+		position: relative;
+		z-index: 2;
 
 		&_number {
 			margin: 0;
@@ -33,6 +37,8 @@ $dark-grey: rgb(165, 165, 165);
 		outline : none;
 		width: 100%;
 		margin-bottom: 30px;
+		position: relative;
+		z-index: 2;
 
 		&::-webkit-slider-thumb{
 			-webkit-appearance: none;

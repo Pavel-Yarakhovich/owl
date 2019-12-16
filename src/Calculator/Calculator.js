@@ -1,6 +1,7 @@
 import React from 'react';
 import Total from './Total';
 import { Theme } from '../theme-context';
+import Title from './Title';
 
 import classes from './Calculator.module.scss';
 
@@ -42,6 +43,7 @@ class Calculator extends React.Component {
 					transition: 'all 0.3s ease',
 					boxShadow: `3px 6px 12px ${this.context.border}` }}
 			>
+				<Title />
 				<div 
 					className={classes.calculator__title_block}
 					style={{ color: this.context.text }}
